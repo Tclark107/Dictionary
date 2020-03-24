@@ -1,3 +1,18 @@
+This project is a Dictionary ADT built with a linked list in C.
+
+Dictionary.h
+My header file with prototypes of functions and exported reference of type DictionaryObj
+
+Dictionary.c
+My ADT built from a linked list.
+
+DictionaryClient.c
+The test built by the professor
+
+DictionaryTest.c
+The tests I ran as I was building the ADT.
+
+
 TODO: 
 1) Reread lab5: check
 2) Reread pa3:check
@@ -12,5 +27,3 @@ TODO:
 10) run it against the professors test: check
 11) delete binaries with make clean and run valgrind: check
 12) clean comments and upload to git: check
-
-This project is a Dictionary ADT built with a linked list in C.
