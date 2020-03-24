@@ -1,13 +1,13 @@
 TODO: 
-1) Reread lab5
-2) Reread pa3
+1) Reread lab5: check
+2) Reread pa3:check
+2 and 1/2) play with IntegerStack ADT and learn what its doing: check
 3)I need to create the operations in the ADT so that the program stops 
-   yelling at me.  
-4) I need to create the constructor and destructor first.
-5) I need a way to add to my linked list.  
-6) Then I need print and then lookup(I am going to try to do some of
-   the functions recursively.
-7) Then I'll clean up the rest of the functions.
-8) Test! Test! Test!
-9) run it against the professors test
-10) delete binaries with make clean and run valgrind
+   yelling at me: check
+4) I need to create the constructor and destructor first:
+5) I need a way to add to my linked list: must fix to work with lookup() 
+6) Then I need print and then lookup: check
+7) Then I'll clean up the rest of the functions:
+8) Test! Test! Test!:
+9) run it against the professors test: 
+10) delete binaries with make clean and run valgrind: 
