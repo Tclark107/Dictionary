@@ -4,10 +4,13 @@ TODO:
 2 and 1/2) play with IntegerStack ADT and learn what its doing: check
 3)I need to create the operations in the ADT so that the program stops 
    yelling at me: check
-4) I need to create the constructor and destructor first:
-5) I need a way to add to my linked list: must fix to work with lookup() 
+8) I need to create the constructor and destructor first:
+5) I need a way to add to my linked list: check 
 6) Then I need print and then lookup: check
-7) Then I'll clean up the rest of the functions:
-8) Test! Test! Test!:
-9) run it against the professors test: 
-10) delete binaries with make clean and run valgrind: 
+7) create delete, then create make empty, then the destructor: check
+9) Test! Test! Test!: check
+10) run it against the professors test: check
+11) delete binaries with make clean and run valgrind: check
+12) clean comments and upload to git: check
+
+This project is a Dictionary ADT built with a linked list in C.

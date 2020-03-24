@@ -75,7 +75,7 @@ Dictionary newDictionary(void) {
 // destructor for the Dictionary type
 void freeDictionary(Dictionary* pD) {
    if(*pD != NULL && pD != NULL) {
-      //if(!isEmpty(*pD)) makeEmpty(*pD);
+      if(!isEmpty(*pD)) makeEmpty(*pD);
       free(*pD);
       *pD = NULL;
    }
@@ -112,8 +112,7 @@ char* lookup(Dictionary D, char* k) {
       fprintf(stderr,"Stack Error: calling lookup() on NULL Stack reference\n");
       exit(EXIT_FAILURE);
    }
-   Node N = malloc(sizeof(NodeObj));
-   assert(N!=NULL);
+   Node N;
    for(N = D->head; N!=NULL; N = N->next) {
       if(!strcmp(k,N->key)) {
          return N->value;
@@ -130,18 +129,19 @@ void insert(Dictionary D, char* k, char* v) {
       fprintf(stderr,"Stack Error: calling insert() on NULL Stack reference\n");
       exit(EXIT_FAILURE);
    }
-   Node N = malloc(sizeof(NodeObj));
-   assert(N!=NULL);
-   N->key = k;
-   N->value = v;
-   if(D->numItems==0) {
-      D->head = N;
-      D->tail = N;
+   if(lookup(D,k)==NULL){
+      Node N = NewNode(k,v);
+      if(D->numItems==0) {
+         D->head = N;
+         D->tail = N;
+      } else {
+         D->tail->next = N;
+         D->tail = N;
+      }
+      D->numItems++; 
    } else {
-      D->tail->next = N;
-      D->tail = N;
+      printf("cannot insert duplicate keys\n");
    }
-   D->numItems++; 
 }
 
 // delete()
@@ -152,6 +152,34 @@ void delete(Dictionary D, char* k) {
       fprintf(stderr,"Stack Error: calling insert() on NULL Stack reference\n");
       exit(EXIT_FAILURE);
    }
+   if(lookup(D,k)!=NULL){
+      Node P;
+      Node N;
+      P = D->head;
+      N = D->head->next; 
+      for(;N != NULL;N = N->next) {
+         if(P->key == k) {
+            D->head = P->next;
+            freeNode(&P);
+            break;
+         }
+         if(N->key == k) {
+            if(N == D->tail) {
+               D->tail = P;
+               P->next = NULL;
+               freeNode(&N);
+               break;
+            }
+            P->next = N->next;
+            freeNode(&N);
+            break;
+         }
+         P = P->next;
+      }
+      D->numItems--;
+   } else {
+      printf("cannot delete non-existent key\n");
+   }
 }
 
 // makeEmpty()
@@ -161,6 +189,20 @@ void makeEmpty(Dictionary D) {
    if(D==NULL) {
       fprintf(stderr,"Stack Error: calling insert() on NULL Stack reference\n");
       exit(EXIT_FAILURE);
+   }
+   if(D->numItems > 0) {
+      Node N;
+      while(D->numItems > 1) {
+         N = D->head;
+         D->head = D->head->next;
+         freeNode(&N);
+         D->numItems--;
+      } 
+      N = D->head;
+      D->head = NULL;
+      D->tail = NULL;
+      freeNode(&N);
+      D->numItems--;
    }
 }
 
@@ -173,8 +215,7 @@ void printDictionary(FILE* out, Dictionary D) {
       exit(EXIT_FAILURE);
    }
    if(D->numItems>0) {
-      Node N = malloc(sizeof(NodeObj));
-      assert(N!=NULL);
+      Node N;
       for(N = D->head; N != NULL; N = N->next) {
          fprintf(out,"%s %s\n",N->key,N->value);
       }
